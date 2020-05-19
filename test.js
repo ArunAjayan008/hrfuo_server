@@ -42,6 +42,7 @@ function checkhash(userpwd, salt) {
 // var mongocl = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/employee";
 var User = require("./user");
+var profile = require("./profile.js");
 
 mongoose.connect(
   url,
@@ -119,7 +120,7 @@ mongoose.connect(
         var edu_qual = post_data.edu_qual;
         var address = post_data.address;
 
-        var profile_reg = new Profile({
+        var profile_reg = new profile({
           mobno: mobno,
           age: age,
           dob: dob,
