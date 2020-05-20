@@ -107,10 +107,6 @@ mongoose.connect(
           }
         });
       });
-
-      var getprofile = require("./get_profile.js");
-      app.use("/getprofile", getprofile);
-
       app.post("/create_profile", (request, response) => {
         var post_data = request.body;
         var mobno = post_data.mobno;
@@ -135,6 +131,18 @@ mongoose.connect(
           response.json("saved");
         });
       });
+
+      var getprofile = require("./get_profile.js");
+      app.use("/getprofile", getprofile);
+
+      var getservice = require("./getservice.js");
+      app.use("/getservice", getservice);
+
+      var getleave = require("./getleave.js");
+      app.use("/getleave", getleave);
+
+      var getnotify = require("./getnotify.js");
+      app.use("/genotify", getnotify);
 
       app.listen(3000, function () {
         console.log("connected");
