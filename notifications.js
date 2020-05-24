@@ -17,5 +17,5 @@ var notifySchema = mongoose.Schema({
     type: String,
   },
 });
-var notify = mongoose.model("Notifications", notifySchema);
+var notify = mongoose.model("Notification", notifySchema);
 module.exports = notify;

@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-var profile = require("./profile");
+var holiday = require("./holiday.js");
 
 router.get("/", (request, response) => {
-  var uid = request.query.id;
-  profile.find({ userid: uid }, function (err, prof) {
+  holiday.find({}, function (err, holiday) {
     if (err) console.log(err);
-    response.json(prof);
+    response.json(holiday);
   });
 });
 module.exports = router;

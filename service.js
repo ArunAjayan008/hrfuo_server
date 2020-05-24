@@ -16,7 +16,7 @@ var serviceSchema = mongoose.Schema({
   dor: {
     type: String,
   },
-  date_last_promotion: {
+  date_of_lastprom: {
     type: String,
   },
   next_promotion: {

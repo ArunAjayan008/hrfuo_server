@@ -5,19 +5,19 @@ var leaveSchema = mongoose.Schema({
     type: String,
   },
   CL: {
-    type: int,
+    type: Number,
   },
   EL: {
-    type: int,
+    type: Number,
   },
   HPL: {
-    type: int,
+    type: Number,
   },
   ESI: {
-    type: int,
+    type: Number,
   },
   Absent: {
-    type: int,
+    type: Number,
   },
 });
 var leave = mongoose.model("leave", leaveSchema);

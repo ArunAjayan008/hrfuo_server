@@ -4,7 +4,7 @@ var profileSchema = mongoose.Schema({
   userid: {
     type: String,
   },
-  designation: {
+  desig: {
     type: String,
   },
   age: {

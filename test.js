@@ -40,9 +40,9 @@ function checkhash(userpwd, salt) {
 }
 
 // var mongocl = mongodb.MongoClient;
-var url = "mongodb://localhost:27017/employee";
+var url = "mongodb://localhost:27017/fuodb";
 var User = require("./user");
-var profile = require("./profile.js");
+var profile = require("./profile");
 
 mongoose.connect(
   url,
@@ -109,7 +109,8 @@ mongoose.connect(
       });
       app.post("/create_profile", (request, response) => {
         var post_data = request.body;
-        var mobno = post_data.mobno;
+        var userid = post_data.userid;
+        var desig = post_data.desig;
         var age = post_data.age;
         var dob = post_data.dob;
         var gender = post_data.gender;
@@ -117,7 +118,8 @@ mongoose.connect(
         var address = post_data.address;
 
         var profile_reg = new profile({
-          mobno: mobno,
+          userid: userid,
+          desig: desig,
           age: age,
           dob: dob,
           gender: gender,
@@ -142,7 +144,10 @@ mongoose.connect(
       app.use("/getleave", getleave);
 
       var getnotify = require("./getnotify.js");
-      app.use("/genotify", getnotify);
+      app.use("/getnotify", getnotify);
+
+      var getholiday = require("./get_holidays.js");
+      app.use("/getholiday", getholiday);
 
       app.listen(3000, function () {
         console.log("connected");
