@@ -10,7 +10,7 @@ var earningSchema = mongoose.Schema({
   year: {
     type: String,
   },
-  basic: {
+  basicval: {
     type: Number,
   },
   da: {
