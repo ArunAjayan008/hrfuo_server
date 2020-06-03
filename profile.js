@@ -7,6 +7,9 @@ var profileSchema = mongoose.Schema({
   eid: {
     type: String,
   },
+  emp_type: {
+    type: String,
+  },
   age: {
     type: String,
   },

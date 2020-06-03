@@ -65,8 +65,7 @@ mongoose.connect(
           } else {
             profile.find({ mobno: mobno }).countDocuments(function (err, obj) {
               if (obj == 0) {
-                var res = "unregistered";
-                response.json(res);
+                response.json("unregistered");
               } else {
                 var hashdata = saltHash(realpwd);
                 var enc_password = hashdata.passwordHash;
@@ -80,9 +79,10 @@ mongoose.connect(
                 });
                 user_reg.save(function (err) {
                   if (err) throw err;
-
+                  profile.findOne({ mobno: mobno }, function (err, obj) {
+                    response.json(obj.emp_type);
+                  });
                   console.log("Author successfully saved.");
-                  response.json("saved");
                 });
               }
             });
@@ -105,7 +105,9 @@ mongoose.connect(
               var hash_pwd = checkhash(ent_password, salt).passwordHash;
               var enc_password = user.enc_password;
               if (hash_pwd == enc_password) {
-                response.json("Login Successful");
+                profile.findOne({ mobno: mobno }, function (err, obj) {
+                  response.json(obj.emp_type);
+                });
                 console.log("Login Successful");
               } else {
                 response.json("Invalid Credentials");
