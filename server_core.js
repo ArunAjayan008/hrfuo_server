@@ -55,29 +55,36 @@ mongoose.connect(
 
       app.post("/register", (request, response) => {
         var post_data = request.body;
-        var realpwd = post_data.password;
-        var hashdata = saltHash(realpwd);
-        var enc_password = hashdata.passwordHash;
-        var salt = hashdata.salt;
-
-        var name = post_data.name;
         var mobno = post_data.mobno;
+        var name = post_data.name;
+        var realpwd = post_data.password;
 
-        var user_reg = new User({
-          name: name,
-          mobno: mobno,
-          enc_password: enc_password,
-          salt: salt,
-        });
         User.find({ mobno: mobno }).countDocuments(function (err, obj) {
           if (obj != 0) {
             response.json("Already exists");
-            console.log(obj);
           } else {
-            user_reg.save(function (err) {
-              if (err) throw err;
-              console.log("Author successfully saved.");
-              response.json("saved");
+            profile.find({ mobno: mobno }).countDocuments(function (err, obj) {
+              if (obj == 0) {
+                var res = "unregistered";
+                response.json(res);
+              } else {
+                var hashdata = saltHash(realpwd);
+                var enc_password = hashdata.passwordHash;
+                var salt = hashdata.salt;
+
+                var user_reg = new User({
+                  name: name,
+                  mobno: mobno,
+                  enc_password: enc_password,
+                  salt: salt,
+                });
+                user_reg.save(function (err) {
+                  if (err) throw err;
+
+                  console.log("Author successfully saved.");
+                  response.json("saved");
+                });
+              }
             });
           }
         });
