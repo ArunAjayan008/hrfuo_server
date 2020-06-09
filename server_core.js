@@ -61,7 +61,7 @@ mongoose.connect(
 
         User.find({ mobno: mobno }).countDocuments(function (err, obj) {
           if (obj != 0) {
-            response.json("Already exists");
+            response.json("User already exists");
           } else {
             profile.find({ mobno: mobno }).countDocuments(function (err, obj) {
               if (obj == 0) {
