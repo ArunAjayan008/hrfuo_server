@@ -58,6 +58,7 @@ mongoose.connect(
         var mobno = post_data.mobno;
         var name = post_data.name;
         var realpwd = post_data.password;
+        var token = post_data.token;
 
         User.find({ mobno: mobno }).countDocuments(function (err, obj) {
           if (obj != 0) {
@@ -76,6 +77,7 @@ mongoose.connect(
                   mobno: mobno,
                   enc_password: enc_password,
                   salt: salt,
+                  token: token,
                 });
                 user_reg.save(function (err) {
                   if (err) throw err;
