@@ -5,7 +5,8 @@ var profile = require("./profile");
 
 router.get("/", (request, response) => {
   var uid = request.query.id;
-  profile.find({ mobno: uid }, function (err, prof) {
+  console.log(uid);
+  profile.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);
   });

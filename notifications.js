@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var notifySchema = mongoose.Schema({
-  mobno: {
+  userid: {
     type: String,
   },
   Title: {

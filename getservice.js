@@ -5,7 +5,7 @@ var service = require("./service.js");
 
 router.get("/", (request, response) => {
   var uid = request.query.id;
-  service.find({ mobno: uid }, function (err, prof) {
+  service.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);
   });

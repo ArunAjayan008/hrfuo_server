@@ -4,7 +4,7 @@ var profileSchema = mongoose.Schema({
   mobno: {
     type: String,
   },
-  eid: {
+  userid: {
     type: String,
   },
   emp_type: {

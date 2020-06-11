@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var leaveSchema = mongoose.Schema({
-  mobno: {
+  userid: {
     type: String,
   },
   CL: {

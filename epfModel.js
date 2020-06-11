@@ -1,14 +1,14 @@
 var mongoose = require("mongoose");
 
 var epfSchema = mongoose.Schema({
-  mobno: {
+  userid: {
     type: String,
   },
   uan: {
     type: Number,
   },
   password: {
-    type: Number,
+    type: String,
   },
 });
 var epf = mongoose.model("epf", epfSchema);

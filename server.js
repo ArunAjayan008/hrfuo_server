@@ -52,7 +52,6 @@ mongoose.connect(
     if (err) throw err;
     else {
       // Register
-
       app.post("/register", (request, response) => {
         var post_data = request.body;
         var mobno = post_data.mobno;
@@ -101,9 +100,9 @@ mongoose.connect(
         User.find({ mobno: mobno }).countDocuments(function (err, obj) {
           if (obj == 0) {
             response.json("Account not found");
-            console.log("Account not found");
           } else {
             User.findOne({ mobno: mobno }, function (err, user) {
+              //fetch user credentials
               var salt = user.salt;
               var hash_pwd = checkhash(ent_password, salt).passwordHash;
               var enc_password = user.enc_password;
@@ -111,14 +110,14 @@ mongoose.connect(
                 User.update(
                   { mobno: mobno },
                   {
-                    token: token,
+                    token: token, //update token while login
                   },
                   function (err, response) {
                     console.log(response);
                   }
                 );
                 profile.findOne({ mobno: mobno }, function (err, obj) {
-                  response.json(obj.emp_type);
+                  response.json(obj.emp_type); // returns employee type
                 });
                 console.log("Login Successful");
               } else {
@@ -153,6 +152,13 @@ mongoose.connect(
           if (err) throw err;
           console.log("Profile successfully saved.");
           response.json("saved");
+        });
+      });
+
+      app.get("/getid", (request, response) => {
+        var mobno = request.query.id;
+        profile.findOne({ mobno: mobno }, function (err, obj) {
+          response.json(obj.userid);
         });
       });
 

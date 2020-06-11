@@ -5,7 +5,7 @@ var medical = require("./Medical");
 
 router.get("/", (request, response) => {
   var uid = request.query.id;
-  medical.find({ mobno: uid }, function (err, obj) {
+  medical.find({ userid: uid }, function (err, obj) {
     if (err) console.log(err);
     response.json(obj);
   });

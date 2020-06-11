@@ -5,7 +5,7 @@ var epfo = require("./epfModel");
 
 router.get("/", (request, response) => {
   var uid = request.query.id;
-  epfo.find({ mobno: uid }, function (err, prof) {
+  epfo.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);
   });
