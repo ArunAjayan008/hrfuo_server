@@ -8,7 +8,7 @@ router.get("/", (request, response) => {
   var month = request.query.mn;
   var year = request.query.yr;
   deduct.find(
-    { $and: [{ userid: uid }, { month: month }, { year: year }] },
+    { $and: [{ mobno: uid }, { month: month }, { year: year }] },
     function (err, obj) {
       if (err) console.log(err);
       response.json(obj);

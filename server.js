@@ -96,6 +96,7 @@ mongoose.connect(
 
         var ent_password = post_data.password;
         var mobno = post_data.mobno;
+        var token = post_data.token;
 
         User.find({ mobno: mobno }).countDocuments(function (err, obj) {
           if (obj == 0) {
@@ -107,6 +108,15 @@ mongoose.connect(
               var hash_pwd = checkhash(ent_password, salt).passwordHash;
               var enc_password = user.enc_password;
               if (hash_pwd == enc_password) {
+                User.update(
+                  { mobno: mobno },
+                  {
+                    token: token,
+                  },
+                  function (err, response) {
+                    console.log(response);
+                  }
+                );
                 profile.findOne({ mobno: mobno }, function (err, obj) {
                   response.json(obj.emp_type);
                 });
@@ -175,6 +185,9 @@ mongoose.connect(
 
       var getother_ded = require("./get_other_deduct.js");
       app.use("/get_other_ded", getother_ded);
+
+      var getepf = require("./get_epf.js");
+      app.use("/getepf", getepf);
 
       app.listen(3000, function () {
         console.log("connected");

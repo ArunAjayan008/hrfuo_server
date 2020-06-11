@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var serviceSchema = mongoose.Schema({
-  userid: {
+  mobno: {
     type: String,
   },
   doj: {

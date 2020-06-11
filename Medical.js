@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var medicSchema = new mongoose.Schema({
-  userid: {
+  mobno: {
     type: String,
   },
   cred_bal: {

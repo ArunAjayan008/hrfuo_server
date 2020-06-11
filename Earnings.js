@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var earningSchema = mongoose.Schema({
-  userid: {
+  mobno: {
     type: String,
   },
   month: {
