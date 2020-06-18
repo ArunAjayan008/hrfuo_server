@@ -195,6 +195,18 @@ mongoose.connect(
       var getepf = require("./get_epf.js");
       app.use("/getepf", getepf);
 
+      var getleavedays = require("./getLeavedays.js");
+      app.use("/getleavedays", getleavedays);
+
+      var getepfesi = require("./get_epfesi.js");
+      app.use("/getepfesi", getepfesi);
+
+      var get_service_cas = require("./get_service_cas.js");
+      app.use("/get_service_cas", get_service_cas);
+
+      var get_service_con = require("./get_service_con.js");
+      app.use("/get_service_con", get_service_con);
+
       app.listen(3000, function () {
         console.log("connected");
       });
