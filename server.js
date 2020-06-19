@@ -192,9 +192,6 @@ mongoose.connect(
       var getother_ded = require("./get_other_deduct.js");
       app.use("/get_other_ded", getother_ded);
 
-      var getepf = require("./get_epf.js");
-      app.use("/getepf", getepf);
-
       var getleavedays = require("./getLeavedays.js");
       app.use("/getleavedays", getleavedays);
 
@@ -206,6 +203,9 @@ mongoose.connect(
 
       var get_service_con = require("./get_service_con.js");
       app.use("/get_service_con", get_service_con);
+
+      var get_salary_con = require("./get_salary_con.js");
+      app.use("/get_salary_con", get_salary_con);
 
       app.listen(3000, function () {
         console.log("connected");
