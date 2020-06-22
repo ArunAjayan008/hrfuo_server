@@ -2,13 +2,14 @@ var express = require("express");
 var router = express.Router();
 
 var profile = require("./profile");
+var authToken = require("./authenticateJWToken");
 
-router.get("/", (request, response) => {
-  var uid = request.query.id;
-  console.log(uid);
+router.get("/", authToken, (req, response) => {
+  var uid = req.user.userid;
   profile.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);
   });
 });
+
 module.exports = router;

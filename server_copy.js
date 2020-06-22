@@ -8,6 +8,8 @@ var app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 // // ENCRYPTION
 // // CREATE FUNCTION TO RANDOM SALT
 
@@ -107,7 +109,7 @@ mongoose.connect(
               var hash_pwd = checkhash(ent_password, salt).passwordHash;
               var enc_password = user.enc_password;
               if (hash_pwd == enc_password) {
-                User.update(
+                User.updateOne(
                   { mobno: mobno },
                   {
                     token: token, //update firebasetoken while login
@@ -116,9 +118,18 @@ mongoose.connect(
                     console.log(response);
                   }
                 );
+                // require('crypto').randomBytes(64).toString('hex') => for generating secret key
                 profile.findOne({ mobno: mobno }, function (err, obj) {
-                  response.json(obj.emp_type); // returns employee type
+                  jwt.sign(
+                    { userid: obj.userid },
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: "20m" },
+                    function (err, token) {
+                      response.json(token);
+                    }
+                  );
                 });
+
                 console.log("Login Successful");
               } else {
                 response.json("Invalid Credentials");
