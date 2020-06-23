@@ -10,6 +10,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 // // ENCRYPTION
 // // CREATE FUNCTION TO RANDOM SALT
 
@@ -46,6 +47,7 @@ var url =
   "mongodb+srv://arun:arun@polymorfuz-lbemu.mongodb.net/fuohrd?retryWrites=true&w=majority";
 var User = require("./user");
 var profile = require("./profile");
+var getToken = require("./generateToken");
 
 mongoose.connect(
   url,
@@ -118,6 +120,7 @@ mongoose.connect(
                     console.log(response);
                   }
                 );
+
                 // require('crypto').randomBytes(64).toString('hex') => for generating secret key
                 profile.findOne({ mobno: mobno }, function (err, obj) {
                   jwt.sign(
@@ -172,50 +175,52 @@ mongoose.connect(
           response.json(obj.userid);
         });
       });
+      var gettoken = require("./generateToken");
+      app.use("/getaccess", gettoken);
 
-      var getprofile = require("./get_profile.js");
+      var getprofile = require("./get_profile");
       app.use("/getprofile", getprofile);
 
-      var getservice = require("./getservice.js");
+      var getservice = require("./getservice");
       app.use("/getservice", getservice);
 
-      var getleave = require("./getleave.js");
+      var getleave = require("./getleave");
       app.use("/getleave", getleave);
 
-      var getnotify = require("./getnotify.js");
+      var getnotify = require("./getnotify");
       app.use("/getnotify", getnotify);
 
-      var getholiday = require("./get_holidays.js");
+      var getholiday = require("./get_holidays");
       app.use("/getholiday", getholiday);
 
-      var getmedical = require("./get_medical.js");
+      var getmedical = require("./get_medical");
       app.use("/getmedical", getmedical);
 
-      var getearn = require("./get_earning.js");
+      var getearn = require("./get_earning");
       app.use("/getearning", getearn);
 
-      var getdeduct = require("./get_deduction.js");
+      var getdeduct = require("./get_deduction");
       app.use("/getdeduct", getdeduct);
 
-      var getother_earn = require("./get_other_earn.js");
+      var getother_earn = require("./get_other_earn");
       app.use("/get_other_earn", getother_earn);
 
-      var getother_ded = require("./get_other_deduct.js");
+      var getother_ded = require("./get_other_deduct");
       app.use("/get_other_ded", getother_ded);
 
-      var getleavedays = require("./getLeavedays.js");
+      var getleavedays = require("./getLeavedays");
       app.use("/getleavedays", getleavedays);
 
-      var getepfesi = require("./get_epfesi.js");
+      var getepfesi = require("./get_epfesi");
       app.use("/getepfesi", getepfesi);
 
-      var get_service_cas = require("./get_service_cas.js");
+      var get_service_cas = require("./get_service_cas");
       app.use("/get_service_cas", get_service_cas);
 
-      var get_service_con = require("./get_service_con.js");
+      var get_service_con = require("./get_service_con");
       app.use("/get_service_con", get_service_con);
 
-      var get_salary_con = require("./get_salary_con.js");
+      var get_salary_con = require("./get_salary_con");
       app.use("/get_salary_con", get_salary_con);
 
       app.listen(3000, function () {

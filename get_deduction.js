@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
+var authToken = require("./authenticateJWToken");
 var deduct = require("./Deductions.js");
 
-router.get("/", (request, response) => {
-  var uid = request.query.id;
+router.get("/", authToken, (request, response) => {
+  var uid = request.user.userid;
   var month = request.query.mn;
   var year = request.query.yr;
   deduct.find(

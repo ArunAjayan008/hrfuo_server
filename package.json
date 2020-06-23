@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongo-triggers": "0.0.5",
     "mongodb": "^3.5.5",
-    "mongoose": "^5.9.7"
+    "mongoose": "^5.9.7",
+    "node-localstorage": "^2.1.6"
   }
 }
