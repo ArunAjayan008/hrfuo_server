@@ -2,9 +2,10 @@ var express = require("express");
 var router = express.Router();
 
 var earning = require("./Earnings.js");
+var authToken = require("./authenticateJWToken");
 
-router.get("/", (request, response) => {
-  var uid = request.query.id;
+router.get("/", authToken, (request, response) => {
+  var uid = request.token.userid;
   var month = request.query.mn;
   var year = request.query.yr;
   earning.find(

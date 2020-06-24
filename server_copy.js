@@ -42,10 +42,9 @@ function checkhash(userpwd, salt) {
   return passwordData;
 }
 
-// "mongodb+srv://arun:arun-lbemu.mongodb.net/fuohrd?retryWrites=true&w=majority";
 // var mongocl = mongodb.MongoClient;
-var url = "mongodb//localhost:27017";
-
+var url =
+  "mongodb+srv://arun:arun@polymorfuz-lbemu.mongodb.net/fuohrd?retryWrites=true&w=majority";
 var User = require("./user");
 var profile = require("./profile");
 

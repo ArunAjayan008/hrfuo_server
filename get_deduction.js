@@ -5,7 +5,7 @@ var authToken = require("./authenticateJWToken");
 var deduct = require("./Deductions.js");
 
 router.get("/", authToken, (request, response) => {
-  var uid = request.user.userid;
+  var uid = request.token.userid;
   var month = request.query.mn;
   var year = request.query.yr;
   deduct.find(

@@ -3,8 +3,10 @@ var router = express.Router();
 
 var epfesi = require("./epf_esi_Model");
 
-router.get("/", (request, response) => {
-  var uid = request.query.id;
+var authToken = require("./authenticateJWToken");
+
+router.get("/", authToken, (request, response) => {
+  var uid = request.token.userid;
   epfesi.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);
