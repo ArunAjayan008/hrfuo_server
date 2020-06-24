@@ -42,12 +42,12 @@ function checkhash(userpwd, salt) {
   return passwordData;
 }
 
+// "mongodb+srv://arun:arun-lbemu.mongodb.net/fuohrd?retryWrites=true&w=majority";
 // var mongocl = mongodb.MongoClient;
-var url =
-  "mongodb+srv://arun:arun@polymorfuz-lbemu.mongodb.net/fuohrd?retryWrites=true&w=majority";
+var url = "mongodb//localhost:27017";
+
 var User = require("./user");
 var profile = require("./profile");
-var getToken = require("./generateToken");
 
 mongoose.connect(
   url,
@@ -122,16 +122,15 @@ mongoose.connect(
                 );
 
                 // require('crypto').randomBytes(64).toString('hex') => for generating secret key
-                profile.findOne({ mobno: mobno }, function (err, obj) {
-                  jwt.sign(
-                    { userid: obj.userid },
-                    process.env.ACCESS_TOKEN_SECRET,
-                    { expiresIn: "20m" },
-                    function (err, token) {
-                      response.json(token);
-                    }
-                  );
-                });
+                // profile.findOne({ mobno: mobno }, function (err, obj) {
+
+                jwt.sign(
+                  { tokenid: mobno },
+                  process.env.AUTH_TOKEN_SECRET,
+                  function (err, token) {
+                    response.json(token);
+                  }
+                );
 
                 console.log("Login Successful");
               } else {

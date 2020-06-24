@@ -5,7 +5,7 @@ var profile = require("./profile");
 var authToken = require("./authenticateJWToken");
 
 router.get("/", authToken, (req, response) => {
-  var uid = req.user.userid;
+  var uid = req.token.userid;
   profile.find({ userid: uid }, function (err, prof) {
     if (err) console.log(err);
     response.json(prof);

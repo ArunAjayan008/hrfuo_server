@@ -4,28 +4,28 @@ var profile = require("./profile");
 var express = require("express");
 var router = express.Router();
 
-router.get("/", (req, res) => {
-  var mobno = req.query.mobno;
-  profile.findOne({ mobno: mobno }, function (err, obj) {
+router.get("/", authenticateToken, (req, res) => {
+  profile.findOne({ mobno: req.getid.tokenid }, function (err, obj) {
     jwt.sign(
       { userid: obj.userid },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "30m" },
+      { expiresIn: "15s" },
       function (err, token) {
         res.json(token);
-        // storetoken(token);
       }
     );
   });
 });
 
-// function storetoken(token) {
-//   if (typeof localStorage === "undefined" || localStorage === null) {
-//     var LocalStorage = require("node-localstorage").LocalStorage;
-//     localStorage = new LocalStorage("./scratch");
-//   }
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
 
-//   localStorage.setItem("token", token);
-//   console.log(localStorage.getItem("token"));
-// }
+  jwt.verify(token, process.env.AUTH_TOKEN_SECRET, (err, obj) => {
+    if (err) return res.sendStatus(403);
+    req.getid = obj;
+    next();
+  });
+}
 module.exports = router;
